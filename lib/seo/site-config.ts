@@ -4,7 +4,7 @@ export const siteConfig = {
   title: "Appvora Technologies | Computer Training Institute & Software Development Company",
   description:
     "Appvora Technologies is a premium Computer Training Institute and Software Development company. Learn Flutter, React, Next.js, AI/ML and more with placement assistance, or partner with us to build production-grade web, mobile, and AI software.",
-  url: "https://appvora.com",
+  url: "https://appvora.in",
   keywords: [
     "Appvora Technologies",
     "computer training institute",

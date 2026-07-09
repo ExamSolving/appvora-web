@@ -27,6 +27,7 @@ import { cn } from "@/lib/utils";
 import { db } from "@/lib/firebase/client";
 import type { SubmitStatus } from "@/components/enrollment/types";
 import { projectTypes, type ProjectType } from "@/lib/data/project-types";
+import { siteConfig } from "@/lib/seo/site-config";
 
 const budgetRanges = [
   "Under ₹50,000",
@@ -206,8 +207,8 @@ export function RequestQuoteDialog({
               {status === "error" && (
                 <p className="flex items-center gap-2 text-sm text-destructive">
                   <AlertCircle className="size-4 shrink-0" />
-                  Something went wrong. Please try again, or email us at
-                  hello@appvora.com.
+                  Something went wrong. Please try again, or email us at{" "}
+                  {siteConfig.contact.email}.
                 </p>
               )}
 

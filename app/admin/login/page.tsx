@@ -67,7 +67,7 @@ export default function AdminLoginPage() {
                 type="email"
                 required
                 autoComplete="username"
-                placeholder="you@appvora.com"
+                placeholder="you@appvora.in"
               />
             </div>
             <div className="flex flex-col gap-1.5">

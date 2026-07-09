@@ -27,6 +27,7 @@ import { db } from "@/lib/firebase/client";
 import { courses } from "@/lib/data/courses";
 import { foundationalCourses } from "@/lib/data/foundational-courses";
 import type { SubmitStatus } from "@/components/enrollment/types";
+import { siteConfig } from "@/lib/seo/site-config";
 
 const allCourseNames = [
   ...courses.map((course) => course.title),
@@ -167,8 +168,8 @@ export function EnrollDialog({
               {status === "error" && (
                 <p className="flex items-center gap-2 text-sm text-destructive">
                   <AlertCircle className="size-4 shrink-0" />
-                  Something went wrong. Please try again, or email us at
-                  hello@appvora.com.
+                  Something went wrong. Please try again, or email us at{" "}
+                  {siteConfig.contact.email}.
                 </p>
               )}
 
