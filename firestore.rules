@@ -1,0 +1,47 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isString(field, maxLen) {
+      return field is string && field.size() > 0 && field.size() < maxLen;
+    }
+
+    function isValidEnrollment(data) {
+      return data.keys().hasAll(['name', 'phone', 'email', 'course', 'createdAt', 'status'])
+        && isString(data.name, 200)
+        && isString(data.phone, 30)
+        && isString(data.email, 200)
+        && isString(data.course, 200)
+        && data.status == 'new';
+    }
+
+    function isValidQuoteRequest(data) {
+      return data.keys().hasAll(['name', 'email', 'phone', 'company', 'projectType', 'budgetRange', 'message', 'createdAt', 'status'])
+        && isString(data.name, 200)
+        && isString(data.email, 200)
+        && isString(data.phone, 30)
+        && data.company is string && data.company.size() < 200
+        && isString(data.projectType, 100)
+        && isString(data.budgetRange, 100)
+        && data.message is string && data.message.size() < 5000
+        && data.status == 'new';
+    }
+
+    match /enrollments/{id} {
+      allow create: if isValidEnrollment(request.resource.data);
+      allow read: if request.auth != null;
+      allow update, delete: if false;
+    }
+
+    match /quoteRequests/{id} {
+      allow create: if isValidQuoteRequest(request.resource.data);
+      allow read: if request.auth != null;
+      allow update, delete: if false;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
